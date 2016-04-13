@@ -193,9 +193,9 @@ userRoute.delete(function(req, res) {
   User.findByIdAndRemove(req.params.id, function(err){
     if(err)
       res.status(500).send(err);
-    else if(!user){
+    /*else if(!user){
       res.status(404).json({ message: "User not found" });
-    }else{
+    }*/else{
       res.status(200).json({messages:"user deleted"});
     }
   });
