@@ -190,15 +190,10 @@ userRoute.get(function(req, res) {
 });
 
 userRoute.delete(function(req, res) {
-  /*User.findByIdAndRemove(req.params.id, function(err){
-    if(err)
-      res.status(500).send(err);
-    else{
-      res.status(200).json({messages:"user deleted"});
-    }
-  });*/
-  User.remove({_id: req.params.id}, function(err){
+  User.remove({_id: req.params.id}, function(err,user){
     if(err){
+      res.status(500).send({message: "Server error", data: []});
+    }else if(user ==undefined||user==null||user.result.n === 0){
       res.status(404).send({message: "User not found", data: []});
     }
     else{
@@ -235,7 +230,7 @@ taskRoute.get(function(req, res) {
   Task.findById(req.params.id, function(err,task){
     if(err)
       res.status(500).send(err);
-    else if(!task){
+    else if(!task ||task==undefined){
       res.status(404).json({ message: "Task not found" });
     }else{
       res.status(200).json(task);
@@ -244,13 +239,14 @@ taskRoute.get(function(req, res) {
 });
 
 taskRoute.delete(function(req, res) {
-  Task.findByIdAndRemove(req.params.id, function(err){
-    if(err)
-      res.status(500).send(err);
-    else if(!task){
-      res.status(404).json({ message: "Task not found" });
-    }else{
-      res.status(200).json({messages:"user deleted"});
+  Task.remove({_id: req.params.id}, function(err,task){
+    if(err){
+      res.status(500).send({message: "Server error", data: []});
+    }else if(task ==undefined||task==null||task.result.n === 0){
+      res.status(404).send({message: "Task not found", data: []});
+    }
+    else{
+      res.status(200).json({message: "OK", data: [] });
     }
   });
 });
@@ -259,29 +255,30 @@ taskRoute.put(function(req,res){
   //Tasks cannot be created (or updated) without a name or a deadline.
   if (!req.body.name || !req.body.deadline) {
     res.status(500).json({ message: "Server error, no name or deadline", data: {} });
+  }else{
+    Task.findById(req.params.id, function(err,task){
+      if(err)
+        res.status(500).send(err);
+      else if(task==undefined||!task){
+        res.status(404).json({ message: "Task not found" });
+      }else{
+        for (var property in req.body) {
+          task[property] = req.body.property;
+        }
+        task.save(function(err) {
+          if (err) {
+            res.status(500).json({ message: "Server error", data: err });
+          } else {
+            res.status(200).json({
+              data: task, message: "Task has been updated!"
+            });
+          }
+        });
+      }
+    });
   }
 
 
-  Task.findById(req.params.id, function(err,task){
-    if(err)
-      res.status(500).send(err);
-    else if(!task){
-      res.status(404).json({ message: "User not found" });
-    }else{
-      for (var property in req.body) {
-        task[property] = req.body.property;
-      }
-      task.save(function(err) {
-        if (err) {
-          res.status(500).json({ message: "Server error", data: err });
-        } else {
-          res.status(200).json({
-            data: {}, message: "Task has been updated!"
-          });
-        }
-      });
-    }
-  });
 });
 
 
