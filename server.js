@@ -36,30 +36,30 @@ app.use('/api', router);
 
 var usersRoute = router.route('/users');
 usersRoute.post(function(req, res){
-    var user = new User();
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.pendingTasks = req.body.pendingTasks||[];
-    console.log("name"+JSON.stringify(req.body.name));
-    console.log("USER: " + JSON.stringify(user));
+  var user = new User();
+  user.name = req.body.name;
+  user.email = req.body.email;
+  user.pendingTasks = req.body.pendingTasks||[];
+  console.log("name"+JSON.stringify(req.body.name));
+  console.log("USER: " + JSON.stringify(user));
 
-    console.log("before save");
-    user.save(function(err){
-      console.log("save");
-      if (err) {
-        res.status(500).json({ message: "Server error", data: err });
-      } else {
-        res.status(201).json({message: "OK", data: user});
-      }
-    });
-
-  /*user.save(function(err) {
+  console.log("before save");
+  user.save(function(err){
+    console.log("save");
     if (err) {
       res.status(500).json({ message: "Server error", data: err });
     } else {
-      res.status(200).json({message: "OK", data: user});
+      res.status(201).json({message: "OK", data: user});
     }
-  });*/
+  });
+
+  /*user.save(function(err) {
+   if (err) {
+   res.status(500).json({ message: "Server error", data: err });
+   } else {
+   res.status(200).json({message: "OK", data: user});
+   }
+   });*/
 });
 
 usersRoute.get(function(req, res) {
@@ -83,10 +83,14 @@ usersRoute.get(function(req, res) {
     console.log("not count");
     User.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, users) {
       console.log("In execute");
-      if (err) {
-        res.status(500).json({message: "Server error", data: err});
-      } else {
-        res.status(200).json({message: "OK", data: users});
+      if(users.length==0){
+        res.status(200).json({message: "OK", data: []});
+      }else{
+        if (err) {
+          res.status(500).json({message: "Server error", data: err});
+        } else {
+          res.status(200).json({message: "OK", data: users});
+        }
       }
     });
   }
@@ -104,8 +108,8 @@ var tasksRoute = router.route('/tasks');
 tasksRoute.post(function(req, res){
   //Tasks cannot be created (or updated) without a name or a deadline.
   /*if (!req.body.name || !req.body.deadline) {
-    res.status(500).json({ message: "Server error, no name or deadline", data: {} });
-  }*/
+   res.status(500).json({ message: "Server error, no name or deadline", data: {} });
+   }*/
   var task = new Task();
 
   task.name = req.body.name;
@@ -122,11 +126,11 @@ tasksRoute.post(function(req, res){
       res.json({message:"task added",data: task });
   });
   /*task.save(function(err){
-    if(err)
-      res.status(500).send(err);
-    else
-      res.status(200).json({message:"task added",data: task });
-  });*/
+   if(err)
+   res.status(500).send(err);
+   else
+   res.status(200).json({message:"task added",data: task });
+   });*/
 });
 
 tasksRoute.options(function(req, res){
