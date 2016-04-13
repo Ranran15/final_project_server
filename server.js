@@ -181,22 +181,28 @@ userRoute.get(function(req, res) {
   User.findById(req.params.id, function(err,user){
     if(err)
       res.status(500).send(err);
-    else if(!user){
+    else if(user==undefined || user==null){
       res.status(404).json({ message: "User not found" });
     }else{
-      res.status(200).json(user);
+      res.status(200).json({message: "OK", data: user});
     }
   });
 });
 
 userRoute.delete(function(req, res) {
-  User.findByIdAndRemove(req.params.id, function(err){
+  /*User.findByIdAndRemove(req.params.id, function(err){
     if(err)
       res.status(500).send(err);
-    /*else if(!user){
-      res.status(404).json({ message: "User not found" });
-    }*/else{
+    else{
       res.status(200).json({messages:"user deleted"});
+    }
+  });*/
+  User.remove({_id: req.params.id}, function(err){
+    if(err){
+      res.status(404).send({message: "User not found", data: []});
+    }
+    else{
+      res.status(200).json({message: "OK", data: [] });
     }
   });
 });
@@ -205,18 +211,18 @@ userRoute.put(function(req,res){
   User.findById(req.params.id, function(err,user){
     if(err)
       res.status(500).send(err);
-    else if(!user){
+    else if(user==undefined || user==null){
       res.status(404).json({ message: "User not found" });
     }else{
-      for (var property in req.body) {
-        user[property] = req.body.property;
-      }
+      user.name= req.body.name;
+      user.email=req.body.email;
+      user.pendingTasks = req.body.pendingTasks;
       user.save(function(err) {
         if (err) {
           res.status(500).json({ message: "Server error", data: err });
         } else {
           res.status(200).json({
-            data: {}, message: "User has been updated!"
+            data: user, message: "User has been updated!"
           });
         }
       });
