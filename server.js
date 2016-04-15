@@ -52,14 +52,6 @@ usersRoute.post(function(req, res){
       res.status(201).json({message: "OK", data: user});
     }
   });
-
-  /*user.save(function(err) {
-   if (err) {
-   res.status(500).json({ message: "Server error", data: err });
-   } else {
-   res.status(200).json({message: "OK", data: user});
-   }
-   });*/
 });
 
 usersRoute.get(function(req, res) {
@@ -120,17 +112,12 @@ tasksRoute.post(function(req, res){
   task.assignedUserName = req.body.assignedUserName;
 
   task.save(function(err){
-    if(err)
-      res.send(err);
-    else
-      res.json({message:"task added",data: task });
+    if (err) {
+      res.status(500).json({ message: "Server error", data: err });
+    } else {
+      res.status(201).json({message: "OK", data: task});
+    }
   });
-  /*task.save(function(err){
-   if(err)
-   res.status(500).send(err);
-   else
-   res.status(200).json({message:"task added",data: task });
-   });*/
 });
 
 tasksRoute.options(function(req, res){
@@ -139,29 +126,36 @@ tasksRoute.options(function(req, res){
 });
 
 tasksRoute.get(function(req, res) {
-  var sort = eval("("+req.query.sort+")");
-  var where = eval("("+req.query.where+")");
-  var select = eval("("+req.query.select+")");
-  var skip = eval("("+req.query.skip+")");
-  var limit = eval("("+req.query.limit+")");
-  var count = (req.query.count === "true") || false;
+  var where = req.query.where ? JSON.parse(req.query.where) : {},
+      sort = eval("("+req.query.sort+")"),
+      select = req.query.select ? JSON.parse(req.query.select) : {},
+      skip = req.query.skip || 0,
+      limit = req.query.limit ? JSON.parse(req.query.limit) : 0,
+      count = (req.query.count === "true") || false;
 
-  if(count){
-    Task.find(where)
-        .sort(sort).select(select).skip(skip).limit(limit).count()
-        .exec(function(err,tasks){
-          if(err)
-            res.status(500).send(err);
-          res.status(200).json(tasks);
-        });
-  }else{
-    Task.find(where)
-        .sort(sort).select(select).skip(skip).limit(limit)
-        .exec(function(err,tasks){
-          if(err)
-            res.status(500).send(err);
-          res.status(200).json(tasks);
-        });
+  console.log("sort"+JSON.stringify(sort)+" where:"+ JSON.stringify(where));
+  if (count) {
+    Task.find(where).sort(sort).select(select).skip(skip).limit(limit).count().exec(function(err, tasks) {
+      if (err) {
+        res.status(500).json({ message: "Server error", data: err });
+      } else {
+        res.status(200).json({ message: "OK", data: tasks });
+      }
+    });
+  } else {
+    console.log("not count");
+    Task.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, tasks) {
+      console.log("In execute");
+      if(tasks.length==0){
+        res.status(200).json({message: "OK", data: []});
+      }else{
+        if (err) {
+          res.status(500).json({message: "Server error", data: err});
+        } else {
+          res.status(200).json({message: "OK", data: tasks});
+        }
+      }
+    });
   }
 });
 
@@ -262,9 +256,13 @@ taskRoute.put(function(req,res){
       else if(task==undefined||!task){
         res.status(404).json({ message: "Task not found" });
       }else{
-        for (var property in req.body) {
-          task[property] = req.body.property;
-        }
+
+        task.name= req.body.name;
+        task.description=req.body.description;
+        task.deadline = req.body.deadline;
+        task.completed = req.body.completed;
+        task.assignedUser = req.body.assignedUser;
+        task.assignedUserName = req.body.assignedUserName;
         task.save(function(err) {
           if (err) {
             res.status(500).json({ message: "Server error", data: err });
