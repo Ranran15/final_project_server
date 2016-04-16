@@ -105,9 +105,9 @@ tasksRoute.post(function(req, res){
   var task = new Task();
 
   task.name = req.body.name;
-  task.description = req.body.description;
+  task.description = req.body.description||"";
   task.deadline = req.body.deadline;
-  task.completed = req.body.completed;
+  task.completed = req.body.completed||false;
   task.assignedUser = req.body.assignedUser;
   task.assignedUserName = req.body.assignedUserName;
 
@@ -146,14 +146,14 @@ tasksRoute.get(function(req, res) {
     console.log("not count");
     Task.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, tasks) {
       console.log("In execute");
-      if(tasks.length==0){
+      //if(tasks.length==0){
         res.status(200).json({message: "OK", data: []});
-      }else{
+     // }else{
         if (err) {
           res.status(500).json({message: "Server error", data: err});
         } else {
           res.status(200).json({message: "OK", data: tasks});
-        }
+     //   }
       }
     });
   }
