@@ -1,10 +1,11 @@
 /**
- * Created by r on 4/11/16.
+ * Created by r on 4/18/16.
  */
+
 var mongoose = require('mongoose');
 
 // Define our beer schema
-var UserSchema = new mongoose.Schema({
+var instructorUserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -14,10 +15,10 @@ var UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    pendingTasks: { type: [String], default:[] },
-    dateCreated: { type: Date, default: Date.now }
+    password: String,
+    courseid: String
 });
 
 // Export the Mongoose model
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('instructorUser', instructorUserSchema);
 
