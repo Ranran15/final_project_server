@@ -1,15 +1,19 @@
 // Get the packages we need
 var express = require('express');
 var mongoose = require('mongoose');
-var Task = require('./models/task');
-var User = require('./models/studentUser');
+var courseTask = require('./models/courseTask');
+var personalTask = require('./models/personalTask');
+var Course = require('./models/Course');
+var todo = require('./models/todo');
+var studentUser = require('./models/studentUser');
+var instructorUser = require('./models/instructorUser');
 var bodyParser = require('body-parser');
 var router = express.Router();
 
 //replace this with your Mongolab URL
 //digital ocean
 //mongoose.connect('mongodb://localhost/mp4');
-mongoose.connect('mongodb://for498web4:forever1@ds019980.mlab.com:19980/mp4')
+//mongoose.connect('mongodb://for498web4:forever1@ds019980.mlab.com:19980/mp4')
 
 // Create our Express application
 var app = express();
@@ -34,16 +38,17 @@ app.use(bodyParser.urlencoded({
 // All our routes will start with /api
 app.use('/api', router);
 
-var usersRoute = router.route('/users');
-usersRoute.post(function(req, res){
-  var user = new User();
+var studentusersRoute = router.route('/studentusers');
+studentusersRoute.post(function(req, res){
+  var user = new studentUser();
   user.name = req.body.name;
   user.email = req.body.email;
-  user.pendingTasks = req.body.pendingTasks||[];
-  console.log("name"+JSON.stringify(req.body.name));
-  console.log("USER: " + JSON.stringify(user));
+  user.password = req.body.password;
+  user.courseList = req.body.courseList;
 
-  console.log("before save");
+  //console.log("name"+JSON.stringify(req.body.name));
+  //console.log("USER: " + JSON.stringify(user));
+
   user.save(function(err){
     console.log("save");
     if (err) {
@@ -54,7 +59,7 @@ usersRoute.post(function(req, res){
   });
 });
 
-usersRoute.get(function(req, res) {
+studentusersRoute.get(function(req, res) {
   var where = req.query.where ? JSON.parse(req.query.where) : {},
       sort = eval("("+req.query.sort+")"),
       select = req.query.select ? JSON.parse(req.query.select) : {},
@@ -62,9 +67,9 @@ usersRoute.get(function(req, res) {
       limit = req.query.limit ? JSON.parse(req.query.limit) : 0,
       count = (req.query.count === "true") || false;
 
-  console.log("sort"+JSON.stringify(sort)+" where:"+ JSON.stringify(where));
+  //console.log("sort"+JSON.stringify(sort)+" where:"+ JSON.stringify(where));
   if (count) {/*mongoose.model('User')*/
-    User.find(where).sort(sort).select(select).skip(skip).limit(limit).count().exec(function(err, users) {
+    studentUser.find(where).sort(sort).select(select).skip(skip).limit(limit).count().exec(function(err, users) {
       if (err) {
         res.status(500).json({ message: "Server error", data: err });
       } else {
@@ -73,7 +78,7 @@ usersRoute.get(function(req, res) {
     });
   } else {
     console.log("not count");
-    User.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, users) {
+    studentUser.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, users) {
       console.log("In execute");
       if(users.length==0){
         res.status(200).json({message: "OK", data: []});
@@ -89,27 +94,156 @@ usersRoute.get(function(req, res) {
 
 });
 
-usersRoute.options(function(req, res){
+studentusersRoute.options(function(req, res){
+  res.writeHead(200);
+  res.end();
+});
+
+
+var instructorusersRoute = router.route('/instructorusers');
+instructorusersRoute.post(function(req, res){
+  var user = new instructorUser();
+  user.name = req.body.name;
+  user.email = req.body.email;
+  user.password = req.body.password;
+  user.courseList = req.body.courseList;
+
+  //console.log("name"+JSON.stringify(req.body.name));
+  //console.log("USER: " + JSON.stringify(user));
+
+  user.save(function(err){
+    console.log("save");
+    if (err) {
+      res.status(500).json({ message: "Server error", data: err });
+    } else {
+      res.status(201).json({message: "OK", data: user});
+    }
+  });
+});
+
+instructorusersRoute.get(function(req, res) {
+  var where = req.query.where ? JSON.parse(req.query.where) : {},
+      sort = eval("("+req.query.sort+")"),
+      select = req.query.select ? JSON.parse(req.query.select) : {},
+      skip = req.query.skip || 0,
+      limit = req.query.limit ? JSON.parse(req.query.limit) : 0,
+      count = (req.query.count === "true") || false;
+
+  //console.log("sort"+JSON.stringify(sort)+" where:"+ JSON.stringify(where));
+  if (count) {/*mongoose.model('User')*/
+    instructorUser.find(where).sort(sort).select(select).skip(skip).limit(limit).count().exec(function(err, users) {
+      if (err) {
+        res.status(500).json({ message: "Server error", data: err });
+      } else {
+        res.status(200).json({ message: "OK", data: users });
+      }
+    });
+  } else {
+    console.log("not count");
+    instructorUser.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, users) {
+      console.log("In execute");
+      if(users.length==0){
+        res.status(200).json({message: "OK", data: []});
+      }else{
+        if (err) {
+          res.status(500).json({message: "Server error", data: err});
+        } else {
+          res.status(200).json({message: "OK", data: users});
+        }
+      }
+    });
+  }
+
+});
+
+instructorusersRoute.options(function(req, res){
   res.writeHead(200);
   res.end();
 });
 
 
 
-var tasksRoute = router.route('/tasks');
-tasksRoute.post(function(req, res){
+
+
+
+var coursesRoute = router.route('/courses');
+coursesRoute.post(function(req, res){
   //Tasks cannot be created (or updated) without a name or a deadline.
   /*if (!req.body.name || !req.body.deadline) {
    res.status(500).json({ message: "Server error, no name or deadline", data: {} });
    }*/
-  var task = new Task();
+  var course = new Course();
 
-  task.name = req.body.name;
+  course.name = req.body.name;
+  course.description = req.body.description||"";
+  course.homepage = req.body.homepage;
+  course.instructorid = req.body.instructorid;
+  course.instructorName = req.body.instructorName;
+  course.courseTaskList = req.body.courseTaskList||[];
+  course.studentList = req.body.studentList||[];
+
+  course.save(function(err){
+    if (err) {
+      res.status(500).json({ message: "Server error", data: err });
+    } else {
+      res.status(201).json({message: "OK", data: course});
+    }
+  });
+});
+
+coursesRoute.options(function(req, res){
+  res.writeHead(200);
+  res.end();
+});
+
+coursesRoute.get(function(req, res) {
+  var where = req.query.where ? JSON.parse(req.query.where) : {},
+      sort = eval("("+req.query.sort+")"),
+      select = req.query.select ? JSON.parse(req.query.select) : {},
+      skip = req.query.skip || 0,
+      limit = req.query.limit ? JSON.parse(req.query.limit) : 0,
+      count = (req.query.count === "true") || false;
+
+  console.log("sort"+JSON.stringify(sort)+" where:"+ JSON.stringify(where));
+  if (count) {
+    Course.find(where).sort(sort).select(select).skip(skip).limit(limit).count().exec(function(err, courses) {
+      if (err) {
+        res.status(500).json({ message: "Server error", data: err });
+      } else {
+        res.status(200).json({ message: "OK", data: courses });
+      }
+    });
+  } else {
+    console.log("not count");
+    Course.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, courses) {
+      console.log("In execute");
+      //if(tasks.length==0){
+        res.status(200).json({message: "OK", data: []});
+     // }else{
+        if (err) {
+          res.status(500).json({message: "Server error", data: err});
+        } else {
+          res.status(200).json({message: "OK", data: courses});
+     //   }
+      }
+    });
+  }
+});
+
+
+var courseTaskRoute = router.route('/courseTasks');
+courseTaskRoute.post(function(req, res){
+  //Tasks cannot be created (or updated) without a name or a deadline.
+  /*if (!req.body.name || !req.body.deadline) {
+   res.status(500).json({ message: "Server error, no name or deadline", data: {} });
+   }*/
+  var task = new courseTask();
+
+  task.courseid = req.body.courseid;
   task.description = req.body.description||"";
-  task.deadline = req.body.deadline;
-  task.completed = req.body.completed||false;
-  task.assignedUser = req.body.assignedUser;
-  task.assignedUserName = req.body.assignedUserName;
+  task.courseName = req.body.courseName;
+  task.releaseDate = req.body.releaseDate;
+  task.dueDate = req.body.dueDate;
 
   task.save(function(err){
     if (err) {
@@ -120,12 +254,12 @@ tasksRoute.post(function(req, res){
   });
 });
 
-tasksRoute.options(function(req, res){
+courseTaskRoute.options(function(req, res){
   res.writeHead(200);
   res.end();
 });
 
-tasksRoute.get(function(req, res) {
+courseTaskRoute.get(function(req, res) {
   var where = req.query.where ? JSON.parse(req.query.where) : {},
       sort = eval("("+req.query.sort+")"),
       select = req.query.select ? JSON.parse(req.query.select) : {},
@@ -135,7 +269,7 @@ tasksRoute.get(function(req, res) {
 
   console.log("sort"+JSON.stringify(sort)+" where:"+ JSON.stringify(where));
   if (count) {
-    Task.find(where).sort(sort).select(select).skip(skip).limit(limit).count().exec(function(err, tasks) {
+    courseTask.find(where).sort(sort).select(select).skip(skip).limit(limit).count().exec(function(err, tasks) {
       if (err) {
         res.status(500).json({ message: "Server error", data: err });
       } else {
@@ -144,20 +278,147 @@ tasksRoute.get(function(req, res) {
     });
   } else {
     console.log("not count");
-    Task.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, tasks) {
+    courseTask.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, tasks) {
       console.log("In execute");
       //if(tasks.length==0){
-        res.status(200).json({message: "OK", data: []});
-     // }else{
-        if (err) {
-          res.status(500).json({message: "Server error", data: err});
-        } else {
-          res.status(200).json({message: "OK", data: tasks});
-     //   }
+      res.status(200).json({message: "OK", data: []});
+      // }else{
+      if (err) {
+        res.status(500).json({message: "Server error", data: err});
+      } else {
+        res.status(200).json({message: "OK", data: tasks});
+        //   }
       }
     });
   }
 });
+
+
+var personalTaskRoute = router.route('/personalTasks');
+personalTaskRoute.post(function(req, res){
+  //Tasks cannot be created (or updated) without a name or a deadline.
+  /*if (!req.body.name || !req.body.deadline) {
+   res.status(500).json({ message: "Server error, no name or deadline", data: {} });
+   }*/
+  var task = new personalTask();
+  task.userid = req.body.userid;
+  task.courseid = req.body.courseid;
+  task.description = req.body.description||"";
+  task.courseName = req.body.courseName;
+  task.releaseDate = req.body.releaseDate;
+  task.dueDate = req.body.dueDate;
+
+  task.save(function(err){
+    if (err) {
+      res.status(500).json({ message: "Server error", data: err });
+    } else {
+      res.status(201).json({message: "OK", data: task});
+    }
+  });
+});
+
+personalTaskRoute.options(function(req, res){
+  res.writeHead(200);
+  res.end();
+});
+
+personalTaskRoute.get(function(req, res) {
+  var where = req.query.where ? JSON.parse(req.query.where) : {},
+      sort = eval("("+req.query.sort+")"),
+      select = req.query.select ? JSON.parse(req.query.select) : {},
+      skip = req.query.skip || 0,
+      limit = req.query.limit ? JSON.parse(req.query.limit) : 0,
+      count = (req.query.count === "true") || false;
+
+  console.log("sort"+JSON.stringify(sort)+" where:"+ JSON.stringify(where));
+  if (count) {
+    personalTask.find(where).sort(sort).select(select).skip(skip).limit(limit).count().exec(function(err, tasks) {
+      if (err) {
+        res.status(500).json({ message: "Server error", data: err });
+      } else {
+        res.status(200).json({ message: "OK", data: tasks });
+      }
+    });
+  } else {
+    console.log("not count");
+    personalTask.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, tasks) {
+      console.log("In execute");
+      //if(tasks.length==0){
+      res.status(200).json({message: "OK", data: []});
+      // }else{
+      if (err) {
+        res.status(500).json({message: "Server error", data: err});
+      } else {
+        res.status(200).json({message: "OK", data: tasks});
+        //   }
+      }
+    });
+  }
+});
+
+var todoRoute = router.route('/todos');
+todoRoute.post(function(req, res){
+  //Tasks cannot be created (or updated) without a name or a deadline.
+  /*if (!req.body.name || !req.body.deadline) {
+   res.status(500).json({ message: "Server error, no name or deadline", data: {} });
+   }*/
+  var task = new todo();
+  task.userid = req.body.userid;
+  task.taskType = req.body.taskType;
+  task.taskid = req.body.taskid;
+  task.description = req.body.description||"";
+  task.timespan = req.body.timespan||[];
+
+  task.save(function(err){
+    if (err) {
+      res.status(500).json({ message: "Server error", data: err });
+    } else {
+      res.status(201).json({message: "OK", data: task});
+    }
+  });
+});
+
+todoRoute.options(function(req, res){
+  res.writeHead(200);
+  res.end();
+});
+
+todoRoute.get(function(req, res) {
+  var where = req.query.where ? JSON.parse(req.query.where) : {},
+      sort = eval("("+req.query.sort+")"),
+      select = req.query.select ? JSON.parse(req.query.select) : {},
+      skip = req.query.skip || 0,
+      limit = req.query.limit ? JSON.parse(req.query.limit) : 0,
+      count = (req.query.count === "true") || false;
+
+  console.log("sort"+JSON.stringify(sort)+" where:"+ JSON.stringify(where));
+  if (count) {
+    todo.find(where).sort(sort).select(select).skip(skip).limit(limit).count().exec(function(err, tasks) {
+      if (err) {
+        res.status(500).json({ message: "Server error", data: err });
+      } else {
+        res.status(200).json({ message: "OK", data: tasks });
+      }
+    });
+  } else {
+    console.log("not count");
+    todo.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, tasks) {
+      console.log("In execute");
+      //if(tasks.length==0){
+      res.status(200).json({message: "OK", data: []});
+      // }else{
+      if (err) {
+        res.status(500).json({message: "Server error", data: err});
+      } else {
+        res.status(200).json({message: "OK", data: tasks});
+        //   }
+      }
+    });
+  }
+});
+
+
+
 
 
 //Default route here
