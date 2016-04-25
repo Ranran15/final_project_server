@@ -12,7 +12,7 @@ var router = express.Router();
 
 //replace this with your Mongolab URL
 //digital ocean
-//mongoose.connect('mongodb://localhost/mp4');
+mongoose.connect('mongodb://for498webfinal:for498webfinal@ds019471.mlab.com:19471/498final');
 
 // Create our Express application
 var app = express();
