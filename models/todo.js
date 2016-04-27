@@ -5,7 +5,7 @@
 var mongoose = require('mongoose');
 
 // Define our beer schema
-var todoSchema = new mongoose.Schema({
+var todoTaskSchema = new mongoose.Schema({
     userid:{type:String, required:true},
     taskType:String,
     taskid: String,
