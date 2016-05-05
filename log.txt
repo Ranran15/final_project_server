@@ -1,0 +1,742 @@
+[33m[nodemon] 1.9.2[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+save
+not count
+In execute
+save
+not count
+In execute
+not count
+In execute
+not count
+In execute
+SyntaxError: Unexpected token b
+    at Object.parse (native)
+    at /vagrant/final_project_server/server.js:124:38
+    at Layer.handle [as handle_request] (/vagrant/final_project_server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/vagrant/final_project_server/node_modules/express/lib/router/route.js:131:13)
+    at next (/vagrant/final_project_server/node_modules/express/lib/router/route.js:125:14)
+    at Route.dispatch (/vagrant/final_project_server/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/vagrant/final_project_server/node_modules/express/lib/router/layer.js:95:5)
+    at /vagrant/final_project_server/node_modules/express/lib/router/index.js:277:22
+    at Function.process_params (/vagrant/final_project_server/node_modules/express/lib/router/index.js:330:12)
+    at next (/vagrant/final_project_server/node_modules/express/lib/router/index.js:271:10)
+    at Function.handle (/vagrant/final_project_server/node_modules/express/lib/router/index.js:176:3)
+    at router (/vagrant/final_project_server/node_modules/express/lib/router/index.js:46:12)
+    at Layer.handle [as handle_request] (/vagrant/final_project_server/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/vagrant/final_project_server/node_modules/express/lib/router/index.js:312:13)
+    at /vagrant/final_project_server/node_modules/express/lib/router/index.js:280:7
+    at Function.process_params (/vagrant/final_project_server/node_modules/express/lib/router/index.js:330:12)
+not count
+In execute
+not count
+In execute
+save
+not count
+In execute
+not count
+In execute
+not count
+In execute
+not count
+In execute
+not count
+In execute
+not count
+In execute
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+not count
+In execute
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+not count
+In execute
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+not count
+In execute
+not count
+In execute
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{"email":""}
+not count
+In execute
+sortundefined where:{"email":""}
+not count
+In execute
+sortundefined where:{"email":"111@111.com"}
+not count
+In execute
+users get
+[ [object Object] ]
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+not count
+In execute
+not count
+In execute
+not count
+In execute
+not count
+In execute
+not count
+In execute
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+572a4fec4071bc660b7455fe
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+find single user
+572a4fec4071bc660b7455fe
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+
+http.js:689
+    throw new Error('Can\'t set headers after they are sent.');
+          ^
+Error: Can't set headers after they are sent.
+    at ServerResponse.OutgoingMessage.setHeader (http.js:689:11)
+    at ServerResponse.header (/vagrant/final_project_server/node_modules/express/lib/response.js:718:10)
+    at ServerResponse.send (/vagrant/final_project_server/node_modules/express/lib/response.js:163:12)
+    at ServerResponse.json (/vagrant/final_project_server/node_modules/express/lib/response.js:249:15)
+    at /vagrant/final_project_server/server.js:225:27
+    at Query.<anonymous> (/vagrant/final_project_server/node_modules/mongoose/lib/query.js:2180:28)
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:177:19
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:109:16
+    at process._tickCallback (node.js:419:13)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+
+http.js:689
+    throw new Error('Can\'t set headers after they are sent.');
+          ^
+Error: Can't set headers after they are sent.
+    at ServerResponse.OutgoingMessage.setHeader (http.js:689:11)
+    at ServerResponse.header (/vagrant/final_project_server/node_modules/express/lib/response.js:718:10)
+    at ServerResponse.json (/vagrant/final_project_server/node_modules/express/lib/response.js:246:10)
+    at /vagrant/final_project_server/server.js:225:27
+    at Query.<anonymous> (/vagrant/final_project_server/node_modules/mongoose/lib/query.js:2180:28)
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:177:19
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:109:16
+    at process._tickCallback (node.js:419:13)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+
+http.js:689
+    throw new Error('Can\'t set headers after they are sent.');
+          ^
+Error: Can't set headers after they are sent.
+    at ServerResponse.OutgoingMessage.setHeader (http.js:689:11)
+    at ServerResponse.header (/vagrant/final_project_server/node_modules/express/lib/response.js:718:10)
+    at ServerResponse.json (/vagrant/final_project_server/node_modules/express/lib/response.js:246:10)
+    at /vagrant/final_project_server/server.js:225:27
+    at Query.<anonymous> (/vagrant/final_project_server/node_modules/mongoose/lib/query.js:2180:28)
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:177:19
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:109:16
+    at process._tickCallback (node.js:419:13)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+
+http.js:689
+    throw new Error('Can\'t set headers after they are sent.');
+          ^
+Error: Can't set headers after they are sent.
+    at ServerResponse.OutgoingMessage.setHeader (http.js:689:11)
+    at ServerResponse.header (/vagrant/final_project_server/node_modules/express/lib/response.js:718:10)
+    at ServerResponse.send (/vagrant/final_project_server/node_modules/express/lib/response.js:163:12)
+    at ServerResponse.json (/vagrant/final_project_server/node_modules/express/lib/response.js:249:15)
+    at /vagrant/final_project_server/server.js:225:27
+    at Query.<anonymous> (/vagrant/final_project_server/node_modules/mongoose/lib/query.js:2180:28)
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:177:19
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:109:16
+    at process._tickCallback (node.js:419:13)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+/vagrant/final_project_server/server.js:228
+    });
+     ^
+SyntaxError: Unexpected token )
+    at Module._compile (module.js:439:25)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Function.Module.runMain (module.js:497:10)
+    at startup (node.js:119:16)
+    at node.js:906:3
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+
+/vagrant/final_project_server/server.js:219
+      if(tasks.length==0){
+         ^
+ReferenceError: tasks is not defined
+    at /vagrant/final_project_server/server.js:219:10
+    at Query.<anonymous> (/vagrant/final_project_server/node_modules/mongoose/lib/query.js:2180:28)
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:177:19
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:109:16
+    at process._tickCallback (node.js:419:13)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+In execute
+
+/vagrant/final_project_server/server.js:219
+      if(courses.length==0){
+                ^
+TypeError: Cannot read property 'length' of undefined
+    at /vagrant/final_project_server/server.js:219:17
+    at /vagrant/final_project_server/node_modules/mongoose/lib/query.js:2176:21
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:160:11
+    at Object.cb (/vagrant/final_project_server/node_modules/mongoose/lib/query.js:1032:14)
+    at Object._onImmediate (/vagrant/final_project_server/node_modules/mongoose/node_modules/mquery/lib/utils.js:137:16)
+    at processImmediate [as _immediateCallback] (timers.js:345:15)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+
+http.js:689
+    throw new Error('Can\'t set headers after they are sent.');
+          ^
+Error: Can't set headers after they are sent.
+    at ServerResponse.OutgoingMessage.setHeader (http.js:689:11)
+    at ServerResponse.header (/vagrant/final_project_server/node_modules/express/lib/response.js:718:10)
+    at ServerResponse.send (/vagrant/final_project_server/node_modules/express/lib/response.js:163:12)
+    at ServerResponse.json (/vagrant/final_project_server/node_modules/express/lib/response.js:249:15)
+    at /vagrant/final_project_server/server.js:351:25
+    at Query.<anonymous> (/vagrant/final_project_server/node_modules/mongoose/lib/query.js:2180:28)
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:177:19
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:109:16
+    at process._tickCallback (node.js:419:13)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+
+http.js:689
+    throw new Error('Can\'t set headers after they are sent.');
+          ^
+Error: Can't set headers after they are sent.
+    at ServerResponse.OutgoingMessage.setHeader (http.js:689:11)
+    at ServerResponse.header (/vagrant/final_project_server/node_modules/express/lib/response.js:718:10)
+    at ServerResponse.send (/vagrant/final_project_server/node_modules/express/lib/response.js:163:12)
+    at ServerResponse.json (/vagrant/final_project_server/node_modules/express/lib/response.js:249:15)
+    at /vagrant/final_project_server/server.js:353:25
+    at Query.<anonymous> (/vagrant/final_project_server/node_modules/mongoose/lib/query.js:2180:28)
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:177:19
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:109:16
+    at process._tickCallback (node.js:419:13)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+/vagrant/final_project_server/models/personalTask.js:12
+    name: type:String,
+              ^
+SyntaxError: Unexpected token :
+    at Module._compile (module.js:439:25)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Module.require (module.js:364:17)
+    at require (module.js:380:17)
+    at Object.<anonymous> (/vagrant/final_project_server/server.js:5:20)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Function.Module.runMain (module.js:497:10)
+    at startup (node.js:119:16)
+    at node.js:906:3
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+
+http.js:689
+    throw new Error('Can\'t set headers after they are sent.');
+          ^
+Error: Can't set headers after they are sent.
+    at ServerResponse.OutgoingMessage.setHeader (http.js:689:11)
+    at ServerResponse.header (/vagrant/final_project_server/node_modules/express/lib/response.js:718:10)
+    at ServerResponse.send (/vagrant/final_project_server/node_modules/express/lib/response.js:163:12)
+    at ServerResponse.json (/vagrant/final_project_server/node_modules/express/lib/response.js:249:15)
+    at /vagrant/final_project_server/server.js:353:25
+    at Query.<anonymous> (/vagrant/final_project_server/node_modules/mongoose/lib/query.js:2180:28)
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:177:19
+    at /vagrant/final_project_server/node_modules/mongoose/node_modules/kareem/index.js:109:16
+    at process._tickCallback (node.js:419:13)
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+/vagrant/final_project_server/models/studentUser.js:19
+courseTaskList:  [{courseid:String, courseTaskid:String, timespent:Number}]}],
+                                                                            ^
+SyntaxError: Unexpected token ]
+    at Module._compile (module.js:439:25)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Module.require (module.js:364:17)
+    at require (module.js:380:17)
+    at Object.<anonymous> (/vagrant/final_project_server/server.js:8:19)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Function.Module.runMain (module.js:497:10)
+    at startup (node.js:119:16)
+    at node.js:906:3
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+/vagrant/final_project_server/models/studentUser.js:25
+                        dueDate: Date
+                        ^^^^^^^
+SyntaxError: Unexpected identifier
+    at Module._compile (module.js:439:25)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Module.require (module.js:364:17)
+    at require (module.js:380:17)
+    at Object.<anonymous> (/vagrant/final_project_server/server.js:8:19)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Function.Module.runMain (module.js:497:10)
+    at startup (node.js:119:16)
+    at node.js:906:3
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server running on port 4000
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute
+sortundefined where:{}
+not count
+In execute

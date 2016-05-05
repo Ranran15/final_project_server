@@ -9,6 +9,7 @@ var personalTaskSchema = new mongoose.Schema({
     userid:{type:String, required:true},
     courseid:String,
     courseName: String,
+    name: {type:String, required:true},
     description: String,
     releaseDate: { type: Date, default: Date.now },
     dueDate: Date

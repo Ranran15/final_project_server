@@ -24,7 +24,7 @@ var port = process.env.PORT || 4000;
 var allowCrossDomain = function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept");
-  //res.header('Access-Control-Allow-Methods', 'GET,PUT,PATCH,POST,DELETE');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,PATCH,POST,DELETE');
   next();
 };
 app.use(allowCrossDomain);
@@ -33,7 +33,7 @@ app.use(allowCrossDomain);
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 // All our routes will start with /api
 app.use('/api', router);
 
@@ -216,14 +216,14 @@ coursesRoute.get(function(req, res) {
     console.log("not count");
     Course.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, courses) {
       console.log("In execute");
-      //if(tasks.length==0){
+      if(courses.length==0){
         res.status(200).json({message: "OK", data: []});
-     // }else{
+      }else{
         if (err) {
           res.status(500).json({message: "Server error", data: err});
         } else {
           res.status(200).json({message: "OK", data: courses});
-     //   }
+        }
       }
     });
   }
@@ -239,6 +239,7 @@ courseTaskRoute.post(function(req, res){
   var task = new courseTask();
 
   task.courseid = req.body.courseid;
+  task.name = req.body.name;
   task.description = req.body.description||"";
   task.courseName = req.body.courseName;
   task.releaseDate = req.body.releaseDate;
@@ -302,6 +303,7 @@ personalTaskRoute.post(function(req, res){
   var task = new personalTask();
   task.userid = req.body.userid;
   task.courseid = req.body.courseid;
+  task.name = req.body.name;
   task.description = req.body.description||"";
   task.courseName = req.body.courseName;
   task.releaseDate = req.body.releaseDate;
@@ -342,14 +344,15 @@ personalTaskRoute.get(function(req, res) {
     console.log("not count");
     personalTask.find(where).sort(sort).select(select).skip(skip).limit(limit).exec(function (err, tasks) {
       console.log("In execute");
-      //if(tasks.length==0){
-      res.status(200).json({message: "OK", data: []});
-      // }else{
-      if (err) {
-        res.status(500).json({message: "Server error", data: err});
-      } else {
-        res.status(200).json({message: "OK", data: tasks});
-        //   }
+      if(tasks.length==0){
+        res.status(200).json({message: "OK", data: []});
+      }else{
+        if (err) {
+          res.status(500).json({message: "Server error", data: err});
+        } 
+        else {
+          res.status(200).json({message: "OK", data: tasks});
+        }
       }
     });
   }

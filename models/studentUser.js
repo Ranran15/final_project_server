@@ -15,9 +15,15 @@ var studentUserSchema = new mongoose.Schema({
         unique: true
     },
     password: String,
-    courseList: { type: [String], default:[] },
-    courseTaskList:  [{courseTaskid:String, timespent:Number}],
-    personalTaskList: [{personalTaskid:String, timespent:Number}],
+    courseList: [{courseid:String, courseName:String}],
+    courseTaskList:  [{courseid:String, courseTaskid:String, timespent:Number}],
+    personalTaskList: [{courseid:String,
+                        courseName:String, 
+                        name:String, 
+                        description:String, 
+                        releaseDate: {type: Date, default: Date.now },
+                        dueDate: Date,
+                        timespent:Number}],
     todoList: [String]
 });
 
