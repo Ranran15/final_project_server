@@ -11,7 +11,13 @@ var CourseSchema = new mongoose.Schema({
     homepage:String,
     instructorid:String,
     instructorName:String,
-    courseTaskList: [{courseTaskid:String, averageTimeSpent:Number}],
+    courseTaskList: [{courseid:String,
+                      courseName:String,
+                      name:String, 
+                      description:String,
+                      releaseDate: {type:Date, default:Date.now},
+                      dueDate:Date,
+                      averageTimeSpent:Number}],
     studentList: [String]
 });
 

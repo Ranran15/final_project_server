@@ -24,7 +24,14 @@ var studentUserSchema = new mongoose.Schema({
                         releaseDate: {type: Date, default: Date.now },
                         dueDate: Date,
                         timespent:Number}],
-    todoList: [String]
+    todoList: [{courseid:String,
+                courseName:String,
+                taskid:String,
+                taskName:String,
+                description:String,
+                start:Date,
+                end:Date
+                }]
 });
 
 // Export the Mongoose model
