@@ -10,6 +10,8 @@ var instructorUser = require('./models/instructorUser');
 var bodyParser = require('body-parser');
 var router = express.Router();
 
+
+
 //replace this with your Mongolab URL
 //digital ocean
 mongoose.connect('mongodb://for498webfinal:for498webfinal@ds019471.mlab.com:19471/498final');
@@ -66,7 +68,7 @@ studentusersRoute.get(function(req, res) {
       limit = req.query.limit ? JSON.parse(req.query.limit) : 0,
       count = (req.query.count === "true") || false;
 
-  //console.log("sort"+JSON.stringify(sort)+" where:"+ JSON.stringify(where));
+  console.log("sort"+JSON.stringify(sort)+" where:"+ JSON.stringify(where));
   if (count) {/*mongoose.model('User')*/
     studentUser.find(where).sort(sort).select(select).skip(skip).limit(limit).count().exec(function(err, users) {
       if (err) {
@@ -128,7 +130,7 @@ instructorusersRoute.get(function(req, res) {
       limit = req.query.limit ? JSON.parse(req.query.limit) : 0,
       count = (req.query.count === "true") || false;
 
-  //console.log("sort"+JSON.stringify(sort)+" where:"+ JSON.stringify(where));
+  console.log("sort"+JSON.stringify(sort)+" where:"+ JSON.stringify(where));
   if (count) {/*mongoose.model('User')*/
     instructorUser.find(where).sort(sort).select(select).skip(skip).limit(limit).count().exec(function(err, users) {
       if (err) {
@@ -776,3 +778,79 @@ todoRoute.put(function(req,res){
 // Start the server
 app.listen(port);
 console.log('Server running on port ' + port);
+
+
+//  start passport
+
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+
+passport.use('local-student', new LocalStrategy(
+  function(email, password, done) {
+    console.log('trying user login, ' + email + ", " + password);
+    studentUser.findOne({ 'email': email }, function(err, user) {
+      console.log("found user: " + JSON.stringify(user));
+      if (err) { 
+        return done(err); 
+      }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      console.log(user, password);
+      if (user.password !== password) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+app.post('/api/studentlogin', function(req, res, next) {
+    passport.authenticate('local-student', function(err, user, info) {
+      if (err) {
+        return next(err); 
+      }
+      if (user === false) {
+        res.status(401).send("user not found");  
+      } else {
+        res.status(200).send(user); 
+      }
+    })(req, res, next); 
+});
+
+passport.use('local-instructor', new LocalStrategy(
+  function(email, password, done) {
+    console.log('trying instructor login, ' + email + ", " + password);
+    instructorUser.findOne({ 'email': email }, function(err, user) {
+      console.log("found instructor: " + JSON.stringify(user));
+      if (err) { 
+        return done(err); 
+      }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      console.log(user, password);
+      if (user.password !== password) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+app.post('/api/instructorlogin', function(req, res, next) {
+    passport.authenticate('local-instructor', function(err, user, info) {
+      if (err) {
+        return next(err); 
+      }
+      if (user === false) {
+        res.status(401).send("user not found");  
+      } else {
+        res.status(200).send(user); 
+      }
+    })(req, res, next); 
+});
+
+
+// end passport
+
