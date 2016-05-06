@@ -16,7 +16,7 @@ var instructorUserSchema = new mongoose.Schema({
         unique: true
     },
     password: String,
-    courseid: String
+    courseList: [String]
 });
 
 // Export the Mongoose model
