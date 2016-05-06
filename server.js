@@ -517,7 +517,7 @@ courseRoute.put(function(req,res){
   Course.findById(req.params.id, function(err,course){
     if(err)
       res.status(500).send(err);
-    else if(user==undefined || user==null){
+    else if(course==undefined || course==null){
       res.status(404).json({ message: "User not found" });
     }else{
       course.name = req.body.name;
